@@ -194,7 +194,7 @@ export default class selectedTask extends Component {
               maximumDate={new Date(2300, 10, 20)}
               onConfirm={(date) => {
                 this.setState({
-                  date: moment(date).format('DD/MM/YYYY')
+                  date: moment(date).format('DD-MM-YYYY')
                 });
                 hideDatePicker();
               }}
