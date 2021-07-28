@@ -135,12 +135,12 @@ export default class Week extends Component {
                       <TouchableOpacity key={index} style={{ marginTop: -25 }} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
                         {(item.notes == null || item.notes == "" || item.notes == undefined) ? (
                           <View style={styles.timeTab} key={item.taskID}>
-                            <Text style={{ flex: 1.5, backgroundColor: item.colorTag, fontSize: 18, padding: 15, textAlign: 'center' }}>{moment(item.timeFrom, "HH:mm").format('LT')} - {item.timeTo}</Text>
+                            <Text style={{ flex: 1.5, backgroundColor: item.colorTag, fontSize: 18, padding: 15, textAlign: 'center' }}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
                             <Text style={styles.taskTitleAlt}>{item.title}</Text>
                           </View>
                         ) : (
                             <View style={styles.timeTab} key={item.taskID}>
-                              <Text style={{ flex: 1.5, backgroundColor: item.colorTag, fontSize: 18, padding: 15, textAlign: 'center' }}>{moment(item.timeFrom, "HH:mm").format('LT')} - {item.timeTo}</Text>
+                              <Text style={{ flex: 1.5, backgroundColor: item.colorTag, fontSize: 18, padding: 15, textAlign: 'center' }}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
                               <View style={{ flex: 5, flexDirection: 'column', backgroundColor: '#eac2f0', justifyContent: 'center', }}>
                                 <Text style={styles.taskTitle}>{item.title}</Text>
                                 <Text style={styles.note}>{item.notes}</Text>

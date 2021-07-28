@@ -137,7 +137,7 @@ export default class Month extends Component {
               ) :
                 this.state.data.map(function (item, index) {
                   if (item.notes == null) {
-                    return <TouchableOpacity key={index} style={{ marginTop: -25 }} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
+                    return <TouchableOpacity key={index} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
                       <View key={item.taskID}>
                         <View style={styles.task} >
                           <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
@@ -150,7 +150,7 @@ export default class Month extends Component {
                       </View>
                     </TouchableOpacity>
                   } else {
-                    return <TouchableOpacity key={index} style={{ marginTop: -25 }} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
+                    return <TouchableOpacity key={index} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
                       <View key={item.key}>
                         <View style={styles.task}>
                           <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>

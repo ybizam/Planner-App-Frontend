@@ -138,6 +138,8 @@ export default class selectedTask extends Component {
         })
         .catch((error) => {
           console.log(error);
+          var errMssg = error.response.data.result;
+          Alert.alert(errMssg);
         });
     }
 
@@ -149,8 +151,6 @@ export default class selectedTask extends Component {
         })
         .catch((error) => {
           console.log(error);
-          var errMssg = error.response.data.result;
-          Alert.alert(errMssg);
         });
     }
 
