@@ -10,10 +10,7 @@ import moment from 'moment';
 import DayWeekMonthHeader from '../components/dayWeekMonthHeader';
 import AddButton from '../components/addBtn';
 
-//const hostname = '192.168.1.116';
 const hostname = 'https://planner-app-backend-final.herokuapp.com';
-const port = 3000;
-const baseURL = `${hostname}:${port}`;
 
 export default class Week extends Component {
 

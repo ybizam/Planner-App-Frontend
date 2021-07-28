@@ -131,7 +131,7 @@ export default class selectedTask extends Component {
         "notes": this.state.notes
       };
 
-      axios.put(`${baseURL}/task/${this.state.taskID}`, requestBody)
+      axios.put(`${hostname}/task/${this.state.taskID}`, requestBody)
         .then((response) => {
           Alert.alert("Successfully Edit");
           navigation.navigate('Home');
@@ -142,13 +142,15 @@ export default class selectedTask extends Component {
     }
 
     const deleteTask = () => {
-      axios.delete(`${baseURL}/task/delete/${this.state.taskID}`)
+      axios.delete(`${hostname}/task/delete/${this.state.taskID}`)
         .then((response) => {
           Alert.alert("Successfully Deleted");
           navigation.navigate('Home');
         })
         .catch((error) => {
           console.log(error);
+          var errMssg = error.response.data.result;
+          Alert.alert(errMssg);
         });
     }
 

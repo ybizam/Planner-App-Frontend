@@ -15,8 +15,6 @@ import { useNavigation } from '@react-navigation/native';
 import AddButton from '../components/addBtn';
 
 const hostname = 'https://planner-app-backend-final.herokuapp.com';
-const port = 3000;
-const baseURL = `${hostname}:${port}`;
 
 const Separator = () => (
   <View style={styles.separator} />

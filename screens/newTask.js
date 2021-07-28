@@ -18,9 +18,6 @@ import CustomHeader from '../components/customHeaders';
 import { TOUCHABLE_STATE } from 'react-native-gesture-handler/lib/typescript/components/touchables/GenericTouchable';
 
 const hostname = 'https://planner-app-backend-final.herokuapp.com';
-//const hostname = '172.22.89.225'
-const port = 3000;
-const baseURL = `${hostname}:${port}`;
 
 export default class newTask extends Component {
   constructor(props) {
@@ -106,12 +103,14 @@ export default class newTask extends Component {
               "notes": "",
               "selectedTimeTo": "",
               "selectedTimeFrom": ""
-            }
+            }   
           )
           navigation.goBack();
         })
         .catch((error) => {
           console.log(error);
+          var errMssg = error.response.data.result;
+          Alert.alert(errMssg);
         });
     }
 
