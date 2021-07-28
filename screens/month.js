@@ -49,20 +49,20 @@ export default class Month extends Component {
     );
 
     const getTaskByDate = () => {
-      axios.get(`${hostname}/task/${this.state.formattedDate}`, {params: {date: this.state.formattedDate}})
-      .then((response) => {
+      axios.get(`${hostname}/task/${this.state.formattedDate}`, { params: { date: this.state.formattedDate } })
+        .then((response) => {
           this.setState({
             data: response.data
           })
-          
+
           console.log(this.state.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
-  
+
   //---runs before the component is removed---
   componentWillUnmount() {
     clearInterval(this.timerID);
@@ -137,31 +137,34 @@ export default class Month extends Component {
                   fontSize: 18,
                 }}>There are no tasks for this date.</Text></View>
               ) :
-                this.state.data.map(function (item) {
+                this.state.data.map(function (item, index) {
                   if (item.notes == null) {
-                    return <View key={item.taskID}>
-                      <View style={styles.task} >
-                        <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
-                        <TimeSeparator />
+                    return <TouchableOpacity key={index} style={{ marginTop: -25 }} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
+                      <View key={item.taskID}>
+                        <View style={styles.task} >
+                          <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
+                          <TimeSeparator />
+                        </View>
+                        <View style={styles.task}>
+                          <View style={{ backgroundColor: item.colorTag, flex: 0.1, marginRight: 20 }}></View>
+                          <Text style={styles.taskNote}>{item.title}</Text>
+                        </View>
                       </View>
-                      <View style={styles.task}>
-                        <View style={{ backgroundColor: item.colorTag, flex: 0.1, marginRight: 20 }}></View>
-                        <Text style={styles.taskNote}>{item.title}</Text>
-                      </View>
-                    </View>
+                    </TouchableOpacity>
                   } else {
-                    return <View key={item.key}>
-                      <View style={styles.task}>
-                        <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
-                        <TimeSeparator />
+                    return <TouchableOpacity key={index} style={{ marginTop: -25 }} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
+                      <View key={item.key}>
+                        <View style={styles.task}>
+                          <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
+                          <TimeSeparator />
+                        </View>
+                        <View style={styles.task}>
+                          <View style={{ backgroundColor: item.colorTag, flex: 0.1, marginRight: 20 }}></View>
+                          <Text style={[styles.taskNote, styles.noteWithDet]}>{item.title}</Text>
+                          <Text style={styles.taskDetail}>{item.notes}</Text>
+                        </View>
                       </View>
-                      <View style={styles.task}>
-                        <View style={{ backgroundColor: item.colorTag, flex: 0.1, marginRight: 20 }}></View>
-                        <Text style={[styles.taskNote, styles.noteWithDet]}>{item.title}</Text>
-                        <Text style={styles.taskDetail}>{item.notes}</Text>
-                      </View>
-
-                    </View>
+                    </TouchableOpacity>
                   }
                 })
             }

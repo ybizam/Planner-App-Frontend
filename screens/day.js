@@ -28,7 +28,7 @@ export default class Day extends Component {
       data: []
     }
   }
-  
+
   componentDidMount() {
     this.timerID = setInterval(
       () =>
@@ -37,15 +37,15 @@ export default class Day extends Component {
     );
 
     const getTaskByDate = () => {
-      axios.get(`${hostname}/task/${moment().format('DD-MM-YYYY')}`, {params: {date: moment().format('DD-MM-YYYY')}})
-      .then((response) => {
-        this.setState({
-          data: response.data
+      axios.get(`${hostname}/task/${moment().format('DD-MM-YYYY')}`, { params: { date: moment().format('DD-MM-YYYY') } })
+        .then((response) => {
+          this.setState({
+            data: response.data
+          })
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
@@ -60,11 +60,11 @@ export default class Day extends Component {
       <View style={{ marginBottom: -10 }}>
         <ScrollView>
           <DayWeekMonthHeader navigation={navigation} />
-    
+
           <View style={styles.container}>
             <View style={styles.buttons}>
               <Text style={[styles.buttons, styles.buttonSelected]}>Day</Text>
-    
+
               <TouchableOpacity onPress={() => navigation.navigate('Week')}>
                 <Text style={styles.buttons}>Week</Text>
               </TouchableOpacity>
@@ -72,37 +72,37 @@ export default class Day extends Component {
                 <Text style={styles.buttons}>Month</Text>
               </TouchableOpacity>
             </View>
-    
+
             <Separator />
-            {(this.state.data.map((item) => (
-              <TouchableOpacity onPress={ () => {navigation.navigate('SelectedTask', { data: item.taskID });}}>
+            {(this.state.data.map((item, index) => (
+              <TouchableOpacity key={index} onPress={() => { navigation.navigate('SelectedTask', { data: item.taskID }); }}>
                 {(item.notes == null || item.notes == "" || item.notes == undefined) ? (
                   <View style={styles.task} key={item.taskID}>
                     <View style={{ backgroundColor: item.colorTag, flex: 0.15 }}></View>
                     <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
                     <Text style={styles.taskTitleAlt}>{item.title}</Text>
                   </View>
-                ):(
-                  <View style={styles.task} key={item.taskID}>
-                    <View style={{ backgroundColor: item.colorTag, flex: 0.15 }}></View>
-                    <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
-                    <Text style={styles.taskTitle}>{item.title}</Text>
-                    <Text style={styles.taskDetail}>{item.notes}</Text>
-                </View>
-                )}
-              
+                ) : (
+                    <View style={styles.task} key={item.taskID}>
+                      <View style={{ backgroundColor: item.colorTag, flex: 0.15 }}></View>
+                      <Text style={styles.taskTime}>{moment(item.timeFrom, "HH:mm").format('LT')} - {moment(item.timeTo, "HH:mm").format('LT')}</Text>
+                      <Text style={styles.taskTitle}>{item.title}</Text>
+                      <Text style={styles.taskDetail}>{item.notes}</Text>
+                    </View>
+                  )}
+
               </TouchableOpacity>
             ))
             )
             }
-    
+
           </View>
-    
+
         </ScrollView>
-            <AddButton navigation={navigation}/>
+        <AddButton navigation={navigation} />
       </View>
     )
-    }
+  }
 };
 const styles = StyleSheet.create({
   container: {
